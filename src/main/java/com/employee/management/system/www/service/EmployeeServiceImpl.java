@@ -125,6 +125,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                     .body("Error while updating Employee data of id: " + id + "Try again!!");
         }
         logger.info("Updated employee records - {} ", emp);
-        return ResponseEntity.of(Optional.of(emp));
+        return ResponseEntity.status(HttpStatus.OK).body("Employee record deleted successfully...");
     }
 }

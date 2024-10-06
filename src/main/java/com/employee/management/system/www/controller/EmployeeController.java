@@ -1,6 +1,7 @@
 package com.employee.management.system.www.controller;
 
 import com.employee.management.system.www.model.Employee;
+import com.employee.management.system.www.service.EmployeeService;
 import com.employee.management.system.www.service.EmployeeServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
 
     @GetMapping("/get/all")
     public ResponseEntity<List<Employee>> getAllEmployeeList() {

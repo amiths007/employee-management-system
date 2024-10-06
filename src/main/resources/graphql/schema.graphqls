@@ -1,0 +1,28 @@
+schema {
+    query: Query
+}
+
+type Query {
+    getAllEmployeeList: [Employee]
+    getFilteredEmployeeList: [Employee]
+    getEmployeeId(id: ID): Employee
+
+}
+
+type Employee {
+    id: ID
+    firstName: String
+    lastName: String
+    age: Int
+    companyName: String
+    email: String
+    avatar: String
+    financeDetails: FinanceDetails
+}
+
+type FinanceDetails {
+    employeeId: ID
+    salary: Float
+    role: String
+    grade: String
+}
