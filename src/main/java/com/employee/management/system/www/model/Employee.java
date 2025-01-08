@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.val;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.validation.annotation.Validated;
 
@@ -43,6 +44,9 @@ public class Employee {
 
     @JsonProperty(value = "avatar")
     private String avatar;
+
+    @JsonProperty(value = "joiningDate")
+    private String joiningDate;
 
     @JsonProperty(value = "financeDetails")
     @OneToOne(cascade = CascadeType.ALL)

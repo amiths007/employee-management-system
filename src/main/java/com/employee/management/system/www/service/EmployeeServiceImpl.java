@@ -7,7 +7,6 @@ import com.employee.management.system.www.model.Employee;
 import com.employee.management.system.www.model.FinanceDetails;
 import com.employee.management.system.www.model.UserDataResponse;
 import com.employee.management.system.www.repository.EmployeeRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
@@ -112,6 +111,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             emp.setLastName(employee.getLastName());
             emp.setAge(employee.getAge());
             emp.setCompanyName(employee.getCompanyName());
+            emp.setJoiningDate(employee.getJoiningDate());
 
             FinanceDetails financeDetails = new FinanceDetails();
             financeDetails.setGrade(employee.getFinanceDetails().getGrade());
