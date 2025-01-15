@@ -1,0 +1,3 @@
+# Dockerfile-postgres
+
+FROM postgres:latest
