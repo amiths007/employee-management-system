@@ -32,6 +32,7 @@ public class UserDataServiceImpl implements UserDataService {
     @Override
     @CircuitBreaker(name = ConfigConstants.CIRCUIT_BREAKER_NAME)
     public UserDataResponse getUserData() {
+        logger.info("Fetching data..");
         try {
             UserDataResponse userDataList = restTemplate.getForObject(configurations.getReqresUrl(), UserDataResponse.class);
             if (Objects.nonNull(userDataList)) {
