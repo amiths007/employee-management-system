@@ -1,6 +1,7 @@
 package com.employee.management.system.www.controller;
 
 import com.employee.management.system.www.model.Employee;
+import com.employee.management.system.www.model.EmployeeCredentials;
 import com.employee.management.system.www.service.EmployeeService;
 import com.employee.management.system.www.service.EmployeeServiceImpl;
 import jakarta.validation.Valid;
@@ -47,5 +48,10 @@ public class EmployeeController {
     public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody @Valid Employee employee) {
         return employeeService.updateEmployee(id, employee);
 
+    }
+
+    @PostMapping("/create/credentials")
+    public ResponseEntity<EmployeeCredentials> createCredentials(@RequestBody List<EmployeeCredentials> credentials) {
+        return employeeService.createCredentials(credentials);
     }
 }

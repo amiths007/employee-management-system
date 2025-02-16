@@ -1,6 +1,7 @@
 package com.employee.management.system.www.service;
 
 import com.employee.management.system.www.model.Employee;
+import com.employee.management.system.www.model.EmployeeCredentials;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface EmployeeService {
     ResponseEntity getEmployeeById(int id);
     ResponseEntity deleteById(int id);
     ResponseEntity updateEmployee(int id, Employee employee);
-
+    ResponseEntity<EmployeeCredentials> createCredentials(List<EmployeeCredentials> credentials);
 }
