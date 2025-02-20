@@ -10,7 +10,7 @@ import lombok.Data;
 public class EmployeeCredentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @JsonProperty("userName")

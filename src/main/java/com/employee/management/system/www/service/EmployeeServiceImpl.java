@@ -149,4 +149,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                     .body("Error while saving Employee Credentials!!. Kindly provide data ");
         }
     }
+
+    @Override
+    public List<EmployeeCredentials> getCredentials() {
+        return credentialsRepository.findAll();
+    }
 }

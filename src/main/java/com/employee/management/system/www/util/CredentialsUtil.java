@@ -13,7 +13,7 @@ import java.util.Objects;
 public class CredentialsUtil {
 
     public List<EmployeeCredentials> encryptPassword(List<EmployeeCredentials> credentials) {
-        PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A, 12);
         credentials.forEach(credential -> {
             if (Objects.nonNull(credential) && !StringUtils.isEmpty(credential.getPassword())) {
                 String password = bCryptPasswordEncoder.encode(credential.getPassword());
