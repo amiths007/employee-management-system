@@ -15,4 +15,5 @@ public interface EmployeeService {
     ResponseEntity deleteById(int id);
     ResponseEntity updateEmployee(int id, Employee employee);
     ResponseEntity<EmployeeCredentials> createCredentials(List<EmployeeCredentials> credentials);
+    List<EmployeeCredentials> getCredentials();
 }

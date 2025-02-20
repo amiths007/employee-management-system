@@ -3,7 +3,6 @@ package com.employee.management.system.www.controller;
 import com.employee.management.system.www.model.Employee;
 import com.employee.management.system.www.model.EmployeeCredentials;
 import com.employee.management.system.www.service.EmployeeService;
-import com.employee.management.system.www.service.EmployeeServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,4 +53,10 @@ public class EmployeeController {
     public ResponseEntity<EmployeeCredentials> createCredentials(@RequestBody List<EmployeeCredentials> credentials) {
         return employeeService.createCredentials(credentials);
     }
+
+    @GetMapping("/get/credentials")
+    public List<EmployeeCredentials> getCredentials() {
+        return employeeService.getCredentials();
+    }
+
 }
