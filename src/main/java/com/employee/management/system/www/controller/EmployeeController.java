@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class EmployeeController {
@@ -18,33 +17,33 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/get/all")
-    public ResponseEntity<List<Employee>> getAllEmployeeList() {
-        return employeeService.getAllEmployeeData();
+    public ResponseEntity getAllEmployeeList() {
+        return ResponseEntity.ok(employeeService.getAllEmployeeData());
     }
 
     @GetMapping("/get/filtered/employees")
-    public ResponseEntity<List<Employee>> getFilteredEmployeeList() {
-        return employeeService.getFilteredEmployeesEmail();
+    public ResponseEntity getFilteredEmployeeList() {
+        return ResponseEntity.ok(employeeService.getFilteredEmployeesEmail());
     }
 
     @PostMapping("/post/employees")
-    public ResponseEntity<List<Employee>> create(@RequestBody @Valid List<Employee> employee) {
-        return employeeService.createEmployees(employee);
+    public ResponseEntity create(@RequestBody @Valid List<Employee> employee) {
+        return ResponseEntity.ok(employeeService.createEmployees(employee));
     }
 
     @GetMapping("/get/employee/{id}")
-    public ResponseEntity<Optional<Employee>> getEmployeeId(@PathVariable @Valid int id) {
-        return employeeService.getEmployeeById(id);
+    public ResponseEntity getEmployeeId(@PathVariable @Valid int id) {
+        return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable @Valid int id) {
-        return employeeService.deleteById(id);
+    public ResponseEntity deleteEmployee(@PathVariable @Valid int id) {
+        return ResponseEntity.ok(employeeService.deleteById(id));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody @Valid Employee employee) {
-        return employeeService.updateEmployee(id, employee);
+    public ResponseEntity updateEmployee(@PathVariable int id, @RequestBody @Valid Employee employee) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, employee));
 
     }
 }
