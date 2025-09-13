@@ -1,16 +1,11 @@
 package com.employee.management.system.www.service;
 
 
-import com.employee.management.system.www.constants.ConfigConstants;
 import com.employee.management.system.www.mapper.ReqresResponseMapper;
 import com.employee.management.system.www.model.Employee;
-import com.employee.management.system.www.model.EmployeeCredentials;
 import com.employee.management.system.www.model.FinanceDetails;
 import com.employee.management.system.www.model.UserDataResponse;
-import com.employee.management.system.www.repository.CredentialsRepository;
 import com.employee.management.system.www.repository.EmployeeRepository;
-import com.employee.management.system.www.util.CredentialsUtil;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +20,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@CircuitBreaker(name = ConfigConstants.CIRCUIT_BREAKER_NAME)
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
@@ -34,16 +28,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private CredentialsRepository credentialsRepository;
-
-    @Autowired
     private UserDataServiceImpl userDataService;
 
     @Autowired
     private ReqresResponseMapper reqresResponseMapper;
 
-    @Autowired
-    private CredentialsUtil credentialsUtil;
 
     public ResponseEntity getAllEmployeeData() {
         logger.debug("Fetching employee records...");
@@ -133,25 +122,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         logger.info("Updated employee records - {} ", emp);
         return ResponseEntity.status(HttpStatus.OK).body("Employee record deleted successfully...");
-    }
-
-    public ResponseEntity createCredentials(List<EmployeeCredentials> credentials) {
-        logger.debug("Saving employee credentials...");
-        if (!CollectionUtils.isEmpty(credentials)) {
-            List<EmployeeCredentials> credentialsList = null;
-            credentialsList = credentialsUtil.encryptPassword(credentials);
-            credentialsList = credentialsRepository.saveAll(credentialsList);
-            logger.info("Created employee credentials - {} ", credentialsList);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Employee credentials created successfully..");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error while saving Employee Credentials!!. Kindly provide data ");
-        }
-    }
-
-    @Override
-    public List<EmployeeCredentials> getCredentials() {
-        return credentialsRepository.findAll();
     }
 }
