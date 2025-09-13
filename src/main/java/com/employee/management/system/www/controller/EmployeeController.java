@@ -17,33 +17,33 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/get/all")
-    public ResponseEntity getAllEmployeeList() {
-        return ResponseEntity.ok(employeeService.getAllEmployeeData());
+    public ResponseEntity<List<Employee>> getAllEmployeeList() {
+        return employeeService.getAllEmployeeData();
     }
 
     @GetMapping("/get/filtered/employees")
-    public ResponseEntity getFilteredEmployeeList() {
-        return ResponseEntity.ok(employeeService.getFilteredEmployeesEmail());
+    public ResponseEntity<Employee> getFilteredEmployeeList() {
+        return employeeService.getFilteredEmployeesEmail();
     }
 
     @PostMapping("/post/employees")
-    public ResponseEntity create(@RequestBody @Valid List<Employee> employee) {
-        return ResponseEntity.ok(employeeService.createEmployees(employee));
+    public ResponseEntity<List<Employee>> create(@RequestBody @Valid List<Employee> employee) {
+        return employeeService.createEmployees(employee);
     }
 
     @GetMapping("/get/employee/{id}")
-    public ResponseEntity getEmployeeId(@PathVariable @Valid int id) {
-        return ResponseEntity.ok(employeeService.getEmployeeById(id));
+    public ResponseEntity<Employee> getEmployeeId(@PathVariable @Valid int id) {
+        return employeeService.getEmployeeById(id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteEmployee(@PathVariable @Valid int id) {
-        return ResponseEntity.ok(employeeService.deleteById(id));
+    public ResponseEntity<Void> deleteEmployee(@PathVariable @Valid int id) {
+        return employeeService.deleteById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateEmployee(@PathVariable int id, @RequestBody @Valid Employee employee) {
-        return ResponseEntity.ok(employeeService.updateEmployee(id, employee));
+    public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody @Valid Employee employee) {
+        return employeeService.updateEmployee(id, employee);
 
     }
 }
