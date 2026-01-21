@@ -4,28 +4,26 @@ package com.employee.management.system.www.service;
 import com.employee.management.system.www.config.RestConfig;
 import com.employee.management.system.www.config.UrlConfigurations;
 import com.employee.management.system.www.model.UserDataResponse;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @Service
 public class UserDataServiceImpl implements UserDataService {
 
     private final Logger logger = LoggerFactory.getLogger(UserDataServiceImpl.class);
 
-    @Autowired
-    private UrlConfigurations configurations;
+    private final UrlConfigurations configurations;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    private RestConfig restConfig;
+    private final RestConfig restConfig;
 
     @Override
     public UserDataResponse getUserData() {

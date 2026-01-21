@@ -2,12 +2,12 @@ package com.employee.management.system.www.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@Configuration
+@ConfigurationProperties(prefix = "reqres")
 public class UrlConfigurations {
 
-    @Value("${reqres.api.call}")
+    @Value("${api.call}")
     private String reqresUrl;
 }

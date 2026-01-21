@@ -3,18 +3,17 @@ package com.employee.management.system.www.controller;
 import com.employee.management.system.www.model.Employee;
 import com.employee.management.system.www.service.EmployeeService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RequiredArgsConstructor
+@RestController
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/get/all")
     public ResponseEntity<List<Employee>> getAllEmployeeList() {

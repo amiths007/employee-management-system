@@ -6,9 +6,9 @@ import com.employee.management.system.www.model.Employee;
 import com.employee.management.system.www.model.FinanceDetails;
 import com.employee.management.system.www.model.UserDataResponse;
 import com.employee.management.system.www.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,19 +19,17 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
-    @Autowired
-    private UserDataServiceImpl userDataService;
+    private final UserDataServiceImpl userDataService;
 
-    @Autowired
-    private ReqresResponseMapper reqresResponseMapper;
+    private final ReqresResponseMapper reqresResponseMapper;
 
 
     public ResponseEntity getAllEmployeeData() {

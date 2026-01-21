@@ -4,7 +4,6 @@ package com.employee.management.system.www.mapper;
 import com.employee.management.system.www.model.Employee;
 import com.employee.management.system.www.model.UserData;
 import com.employee.management.system.www.model.UserDataResponse;
-import com.employee.management.system.www.service.EmployeeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

@@ -4,9 +4,9 @@ import com.employee.management.system.www.mapper.ReqresResponseMapper;
 import com.employee.management.system.www.model.Employee;
 import com.employee.management.system.www.model.UserDataResponse;
 import com.employee.management.system.www.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -16,19 +16,17 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
-public class EmployeeGraphQlServiceImpl implements EmployeeGraphQlService{
+public class EmployeeGraphQlServiceImpl implements EmployeeGraphQlService {
 
     private final Logger logger = LoggerFactory.getLogger(EmployeeGraphQlServiceImpl.class);
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
-    @Autowired
-    private UserDataServiceImpl userDataService;
+    private final UserDataServiceImpl userDataService;
 
-    @Autowired
-    private ReqresResponseMapper reqresResponseMapper;
+    private final ReqresResponseMapper reqresResponseMapper;
 
     public List<Employee> getAllEmployeeData() {
         logger.debug("Fetching employee records...");
