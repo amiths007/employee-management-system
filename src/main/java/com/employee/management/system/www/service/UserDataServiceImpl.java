@@ -29,7 +29,7 @@ public class UserDataServiceImpl implements UserDataService {
     public UserDataResponse getUserData() {
         logger.info("Fetching data..");
         try {
-            UserDataResponse userDataList = restTemplate.getForObject(configurations.getReqresUrl(), UserDataResponse.class);
+            UserDataResponse userDataList = restTemplate.getForObject(configurations.getUrl(), UserDataResponse.class);
             if (Objects.nonNull(userDataList)) {
                 return userDataList;
             }
