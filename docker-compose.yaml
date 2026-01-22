@@ -3,20 +3,21 @@ version: "3.9"
 services:
   postgres:
     image: postgres:16
-    container_name: "employeeDB"
+    container_name: employeeDB
+    restart: unless-stopped
     ports:
-      - "5433:5433"
+      - "5432:5432"
     environment:
       POSTGRES_DB: employee_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      volumes:
-        - postgres_data:/var/lib/postgresql/data
-      healthcheck:
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
       test: ["CMD-SHELL", "pg_isready -U employee_user"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  volumes:
-    postgres_data:
+volumes:
+  postgres_data:
