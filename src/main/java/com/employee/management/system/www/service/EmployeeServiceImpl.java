@@ -55,7 +55,6 @@ public class EmployeeServiceImpl implements EmployeeService {
      *
      * @return filtered employees
      */
-    @Cacheable(value = "filtered-employees")
     public ResponseEntity getFilteredEmployeesEmail() {
         logger.debug("Fetching filtered employee records...");
         UserDataResponse response = userDataService.getUserData();
@@ -112,7 +111,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param id employee id
      * @return void
      */
-    @CacheEvict(key = "#id")
+    @CacheEvict(allEntries = true, cacheNames = "employees")
     public ResponseEntity deleteById(int id) {
         logger.debug("Deleting employee records by id - {}", id);
         if (employeeRepository.existsById(id)) {
@@ -127,11 +126,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      *
-     * @param id employee id
+     * @param id       employee id
      * @param employee employee
      * @return updated employee
      */
-    @CachePut(key = "#id")
+    @CachePut(key = "#id", value = "employee")
     public ResponseEntity updateEmployee(int id, Employee employee) {
         logger.debug("Updating employee records...");
         Employee emp = employeeRepository.findById(id).get();
