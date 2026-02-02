@@ -7,6 +7,7 @@ import com.employee.management.system.www.model.UserDataResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +26,7 @@ public class UserDataServiceImpl implements UserDataService {
 
     private final RestConfig restConfig;
 
+    @Cacheable(value = "userData")
     @Override
     public UserDataResponse getUserData() {
         logger.info("Fetching data..");

@@ -9,6 +9,9 @@ import com.employee.management.system.www.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,7 +34,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final ReqresResponseMapper reqresResponseMapper;
 
-
+    /**
+     *
+     * @return employees
+     */
+    @Cacheable(value = "employees")
     public ResponseEntity getAllEmployeeData() {
         logger.debug("Fetching employee records...");
         List<Employee> employees = employeeRepository.findAll();
@@ -44,6 +51,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     *
+     * @return filtered employees
+     */
+    @Cacheable(value = "filtered-employees")
     public ResponseEntity getFilteredEmployeesEmail() {
         logger.debug("Fetching filtered employee records...");
         UserDataResponse response = userDataService.getUserData();
@@ -59,6 +71,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     *
+     * @param employees list of employees
+     * @return employees
+     */
     public ResponseEntity createEmployees(List<Employee> employees) {
         logger.debug("Saving employee records...");
         if (!CollectionUtils.isEmpty(employees)) {
@@ -72,6 +89,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     *
+     * @param id employee id
+     * @return employee by id
+     */
+    @Cacheable(key = "#id", value = "employee")
     public ResponseEntity getEmployeeById(int id) {
         logger.debug("Fetching employee records by id - {}", id);
         Optional<Employee> employee = employeeRepository.findById(id);
@@ -84,6 +107,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     *
+     * @param id employee id
+     * @return void
+     */
+    @CacheEvict(key = "#id")
     public ResponseEntity deleteById(int id) {
         logger.debug("Deleting employee records by id - {}", id);
         if (employeeRepository.existsById(id)) {
@@ -96,6 +125,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     *
+     * @param id employee id
+     * @param employee employee
+     * @return updated employee
+     */
+    @CachePut(key = "#id")
     public ResponseEntity updateEmployee(int id, Employee employee) {
         logger.debug("Updating employee records...");
         Employee emp = employeeRepository.findById(id).get();
